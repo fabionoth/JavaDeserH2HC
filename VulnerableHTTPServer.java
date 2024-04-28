@@ -143,7 +143,7 @@ public class VulnerableHTTPServer {
                     headerResult.append(String.format("%02x", b));
 
                 // deserialize raw
-                if (headerResult.toString().equals("aced"))
+                if ("aced".equals(headerResult.toString()))
                     responseMsg = deserialize(pbis); // deserialize RAW
                 else{ // deserialize H4sI, rO0,...
                     // read input into string
