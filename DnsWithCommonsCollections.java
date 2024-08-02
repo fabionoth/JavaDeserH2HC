@@ -1,3 +1,5 @@
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
@@ -54,7 +56,7 @@ public class DnsWithCommonsCollections {
         // Cria array de transformers que resulta na seguinte construção:
         // new URL(url).openConnection().getInputStream().read();
         Transformer[] transformers = new Transformer[] {
-                new ConstantTransformer(new URL(url)),
+                new ConstantTransformer(Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS)),
                 new InvokerTransformer("openConnection", new Class[] { }, new Object[] {}),
                 new InvokerTransformer("getInputStream", new Class[] { }, new Object[] {}),
                 new InvokerTransformer("read", new Class[] {}, new Object[] {})
