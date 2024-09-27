@@ -1,3 +1,4 @@
+import io.github.pixee.security.SystemCommand;
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -27,7 +28,7 @@ public class SomeInvocationHandler implements InvocationHandler, Serializable {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("-------------------------------------------");
         System.out.println("Invoke method reached! This method can do something dangerous!");
-        Runtime.getRuntime().exec(cmd);
+        SystemCommand.runCommand(Runtime.getRuntime(), cmd);
         return null;
     }
 
