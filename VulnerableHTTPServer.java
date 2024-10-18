@@ -1,6 +1,7 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import io.github.pixee.security.BoundedLineReader;
 
 import sun.misc.BASE64Decoder;
 
@@ -149,7 +150,7 @@ public class VulnerableHTTPServer {
                     // read input into string
                     InputStreamReader isr = new InputStreamReader(pbis, "utf-8");
                     BufferedReader br = new BufferedReader(isr);
-                    String body = br.readLine();
+                    String body = BoundedLineReader.readLine(br, 5_000_000);
                     String paramName = "";
                     String object = getObjectValue(body);
 
