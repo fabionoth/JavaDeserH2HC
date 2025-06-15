@@ -1,5 +1,5 @@
-import java.io.*;
-/**
+import io.github.pixee.security.ObjectInputFilters;
+import java.io.*;/**
  * Exemplo simples que demonstra a desserialização nativa de um objeto
  * salvo em um arquivo. Observe que, durante a desserialização, o método
  * readObject da classe Alien (que é o tipo do Objeto sendo desserializado)
@@ -25,6 +25,7 @@ import java.io.*;
  *
  * @author @joaomatosf
  */
+
 public class TestDeserialize {
 
     public static void main(String[] args)
@@ -32,6 +33,7 @@ public class TestDeserialize {
         // Obtem stream de bytes a partir do arquivo salvo em disco
         FileInputStream fis = new FileInputStream("ET_object.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
         // Realiza a desserialização! Nesse momento, os magic methods da classe
         // Alien serão automaticamente invocados! (ie. readObject)
         Alien ET = (Alien) ois.readObject(); // <-- Realiza a desserializacao
